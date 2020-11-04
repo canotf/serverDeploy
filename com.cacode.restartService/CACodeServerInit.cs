@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace com.cacode.restartService {
     public partial class CACodeServerInit : Form {
+        private string[] filePaths;
         public CACodeServerInit() {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -103,8 +104,11 @@ namespace com.cacode.restartService {
                     if (!result.Equals("")) {
                         this.lb_successCount.Text = Convert.ToInt32(this.lb_successCount.Text) + 1 + "";
                         string[] sp = result.Split('&');
-                        this.tb_errorIp.Text += sp[0].Split(':')[1] + "\r\n";
-                        this.tb_errorMessage.Text += result + "\r\n";
+                        try {
+                            this.tb_errorIp.Text += sp[0].Split(':')[1] + "\r\n";
+                            this.tb_errorMessage.Text += result + "\r\n";
+                        } catch (Exception) {
+                        }
                     } else {
                         this.lb_errorCount.Text = Convert.ToInt32(this.lb_errorCount.Text) + 1 + "";
                     }
@@ -145,9 +149,9 @@ namespace com.cacode.restartService {
         }
 
         private void tb_upload_filePath_DragEnter(object sender, DragEventArgs e) {
-            string[] filePath = (string[])e.Data.GetData(DataFormats.FileDrop);
+            this.filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
             this.tb_upload_filePath.BorderStyle = BorderStyle.FixedSingle;
-            this.lb_upload_filePath.Text = filePath[0];
+            this.lb_upload_filePath.Text = filePaths[0] + "...";
         }
 
         private void tb_upload_filePath_DragLeave(object sender, EventArgs e) {
@@ -156,19 +160,21 @@ namespace com.cacode.restartService {
 
         private void btn_upload_Click(object sender, EventArgs e) {
             this.btn_upload.Enabled = false;
-            string filePath = this.lb_upload_filePath.Text;
             string ip = this.tb_upload_ip.Text;
             string port = this.tb_upload_port.Text;
             string pwd = this.tb_upload_pwd.Text;
             string serverPath = this.tb_upload_serverPath.Text;
             string user = this.tb_upload_user.Text;
             Renci.SshNet.ConnectionInfo connectionInfo = SshUtil.getSsh(ip, Convert.ToInt32(port), user, pwd);
-            string fileName = filePath.Substring(filePath.LastIndexOf("\\")).Substring(1);
-            log("upload -> " + filePath);
             new Thread(() => {
-                SshUtil.Upload(connectionInfo, filePath, fileName, serverPath);
-                MessageBox.Show("成功上传文件:" + fileName);
-                this.btn_upload.Enabled = true;
+                foreach (string filePath in filePaths) {
+
+                    string fileName = filePath.Substring(filePath.LastIndexOf("\\")).Substring(1);
+                    log("upload -> " + filePath);
+                    SshUtil.Upload(connectionInfo, filePath, fileName, serverPath);
+                    MessageBox.Show("成功上传文件:" + fileName);
+                    this.btn_upload.Enabled = true;
+                }
             }).Start();
         }
     }
