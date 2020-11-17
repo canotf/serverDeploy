@@ -47,8 +47,8 @@
             this.tb_command = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pn_upload = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
             this.lb_upload_filePath = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.btn_upload = new System.Windows.Forms.Button();
             this.tb_upload_filePath = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
@@ -80,10 +80,14 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.tb_errorMessage = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pn_msg = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pn_upload.SuspendLayout();
             this.tb_upload_filePath.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pn_msg.SuspendLayout();
             this.SuspendLayout();
             // 
             // lab_close
@@ -113,6 +117,7 @@
             this.tb_ip.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tb_ip.Size = new System.Drawing.Size(353, 92);
             this.tb_ip.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.tb_ip, "ip address");
             // 
             // label1
             // 
@@ -135,6 +140,7 @@
             this.tb_port.Size = new System.Drawing.Size(353, 25);
             this.tb_port.TabIndex = 2;
             this.tb_port.Text = "22";
+            this.toolTip1.SetToolTip(this.tb_port, "default using 22");
             // 
             // label2
             // 
@@ -157,6 +163,7 @@
             this.tb_user.Size = new System.Drawing.Size(353, 25);
             this.tb_user.TabIndex = 3;
             this.tb_user.Text = "root";
+            this.toolTip1.SetToolTip(this.tb_user, "login user");
             // 
             // label3
             // 
@@ -178,7 +185,8 @@
             this.tb_pwd.Name = "tb_pwd";
             this.tb_pwd.Size = new System.Drawing.Size(353, 25);
             this.tb_pwd.TabIndex = 4;
-            this.tb_pwd.Text = "ABSznh123";
+            this.tb_pwd.Text = "Abc123456***";
+            this.toolTip1.SetToolTip(this.tb_pwd, "login pasword");
             // 
             // label4
             // 
@@ -201,7 +209,8 @@
             this.tb_script.Name = "tb_script";
             this.tb_script.Size = new System.Drawing.Size(353, 140);
             this.tb_script.TabIndex = 5;
-            this.tb_script.Text = "nohup java -jar /home/project/";
+            this.tb_script.Text = "nohup java -jar vpn-0.0.2.jar &";
+            this.toolTip1.SetToolTip(this.tb_script, "command");
             // 
             // label6
             // 
@@ -222,6 +231,7 @@
             this.cb_kill.Size = new System.Drawing.Size(70, 23);
             this.cb_kill.TabIndex = 6;
             this.cb_kill.Text = "yes/no";
+            this.toolTip1.SetToolTip(this.cb_kill, "kill deploy port");
             this.cb_kill.UseVisualStyleBackColor = true;
             // 
             // label7
@@ -258,7 +268,7 @@
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(80, 31);
             this.btn_cancel.TabIndex = 8;
-            this.btn_cancel.Text = "cancel";
+            this.btn_cancel.Text = "clear";
             this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
@@ -292,6 +302,7 @@
             this.tb_initPort.Name = "tb_initPort";
             this.tb_initPort.Size = new System.Drawing.Size(353, 25);
             this.tb_initPort.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.tb_initPort, "deploy port");
             // 
             // label8
             // 
@@ -308,19 +319,21 @@
             this.tb_command.BackColor = System.Drawing.Color.Black;
             this.tb_command.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_command.Font = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.tb_command.ForeColor = System.Drawing.Color.Lime;
-            this.tb_command.Location = new System.Drawing.Point(441, 125);
+            this.tb_command.ForeColor = System.Drawing.Color.White;
+            this.tb_command.Location = new System.Drawing.Point(18, 23);
             this.tb_command.Multiline = true;
             this.tb_command.Name = "tb_command";
-            this.tb_command.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tb_command.Size = new System.Drawing.Size(329, 178);
+            this.tb_command.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tb_command.Size = new System.Drawing.Size(346, 178);
             this.tb_command.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.tb_command, "server run command for now");
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(563, 105);
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(139, 4);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 17);
             this.label9.TabIndex = 10;
@@ -328,9 +341,9 @@
             // 
             // pn_upload
             // 
-            this.pn_upload.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pn_upload.Controls.Add(this.label18);
+            this.pn_upload.BackColor = System.Drawing.Color.White;
             this.pn_upload.Controls.Add(this.lb_upload_filePath);
+            this.pn_upload.Controls.Add(this.label18);
             this.pn_upload.Controls.Add(this.btn_upload);
             this.pn_upload.Controls.Add(this.tb_upload_filePath);
             this.pn_upload.Controls.Add(this.label15);
@@ -345,10 +358,22 @@
             this.pn_upload.Controls.Add(this.tb_upload_port);
             this.pn_upload.Controls.Add(this.tb_upload_ip);
             this.pn_upload.Controls.Add(this.label10);
-            this.pn_upload.Location = new System.Drawing.Point(796, 66);
+            this.pn_upload.Location = new System.Drawing.Point(796, 0);
             this.pn_upload.Name = "pn_upload";
-            this.pn_upload.Size = new System.Drawing.Size(286, 466);
+            this.pn_upload.Size = new System.Drawing.Size(387, 570);
             this.pn_upload.TabIndex = 11;
+            // 
+            // lb_upload_filePath
+            // 
+            this.lb_upload_filePath.AutoSize = true;
+            this.lb_upload_filePath.BackColor = System.Drawing.Color.Transparent;
+            this.lb_upload_filePath.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lb_upload_filePath.ForeColor = System.Drawing.Color.Black;
+            this.lb_upload_filePath.Location = new System.Drawing.Point(37, 418);
+            this.lb_upload_filePath.Name = "lb_upload_filePath";
+            this.lb_upload_filePath.Size = new System.Drawing.Size(13, 20);
+            this.lb_upload_filePath.TabIndex = 0;
+            this.lb_upload_filePath.Text = " ";
             // 
             // label18
             // 
@@ -361,19 +386,10 @@
             this.label18.Size = new System.Drawing.Size(27, 27);
             this.label18.TabIndex = 17;
             this.label18.Text = ">";
+            this.toolTip1.SetToolTip(this.label18, "hide upload window");
             this.label18.Click += new System.EventHandler(this.label18_Click);
             this.label18.MouseEnter += new System.EventHandler(this._MouseEnter);
             this.label18.MouseLeave += new System.EventHandler(this._MouseLeave);
-            // 
-            // lb_upload_filePath
-            // 
-            this.lb_upload_filePath.AutoSize = true;
-            this.lb_upload_filePath.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lb_upload_filePath.Location = new System.Drawing.Point(5, 389);
-            this.lb_upload_filePath.Name = "lb_upload_filePath";
-            this.lb_upload_filePath.Size = new System.Drawing.Size(13, 20);
-            this.lb_upload_filePath.TabIndex = 0;
-            this.lb_upload_filePath.Text = " ";
             // 
             // btn_upload
             // 
@@ -381,11 +397,11 @@
             this.btn_upload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_upload.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.btn_upload.ForeColor = System.Drawing.Color.White;
-            this.btn_upload.Location = new System.Drawing.Point(103, 421);
+            this.btn_upload.Location = new System.Drawing.Point(157, 504);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(80, 31);
             this.btn_upload.TabIndex = 16;
-            this.btn_upload.Text = "上传";
+            this.btn_upload.Text = "UPLOAD";
             this.btn_upload.UseVisualStyleBackColor = false;
             this.btn_upload.Click += new System.EventHandler(this.btn_upload_Click);
             // 
@@ -394,10 +410,11 @@
             this.tb_upload_filePath.AllowDrop = true;
             this.tb_upload_filePath.BackColor = System.Drawing.Color.White;
             this.tb_upload_filePath.Controls.Add(this.label16);
-            this.tb_upload_filePath.Location = new System.Drawing.Point(62, 266);
+            this.tb_upload_filePath.Location = new System.Drawing.Point(103, 371);
             this.tb_upload_filePath.Name = "tb_upload_filePath";
-            this.tb_upload_filePath.Size = new System.Drawing.Size(198, 120);
+            this.tb_upload_filePath.Size = new System.Drawing.Size(217, 120);
             this.tb_upload_filePath.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.tb_upload_filePath, "upload file path");
             this.tb_upload_filePath.DragEnter += new System.Windows.Forms.DragEventHandler(this.tb_upload_filePath_DragEnter);
             this.tb_upload_filePath.DragLeave += new System.EventHandler(this.tb_upload_filePath_DragLeave);
             // 
@@ -406,132 +423,145 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.label16.ForeColor = System.Drawing.Color.Black;
-            this.label16.Location = new System.Drawing.Point(70, 50);
+            this.label16.Location = new System.Drawing.Point(80, 48);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 20);
+            this.label16.Size = new System.Drawing.Size(46, 20);
             this.label16.TabIndex = 0;
-            this.label16.Text = "拖到这";
+            this.label16.Text = "THAT";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(21, 266);
+            this.label15.Location = new System.Drawing.Point(63, 371);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 19);
+            this.label15.Size = new System.Drawing.Size(34, 19);
             this.label15.TabIndex = 8;
-            this.label15.Text = "文件";
+            this.label15.Text = "FILE";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(21, 224);
+            this.label17.Location = new System.Drawing.Point(45, 323);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(35, 19);
+            this.label17.Size = new System.Drawing.Size(52, 19);
             this.label17.TabIndex = 8;
-            this.label17.Text = "位置";
+            this.label17.Text = "LOCAL";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(21, 183);
+            this.label11.Location = new System.Drawing.Point(13, 272);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 19);
+            this.label11.Size = new System.Drawing.Size(84, 19);
             this.label11.TabIndex = 8;
-            this.label11.Text = "密码";
+            this.label11.Text = "PASSWORD";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(21, 141);
+            this.label12.Location = new System.Drawing.Point(22, 218);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(35, 19);
+            this.label12.Size = new System.Drawing.Size(75, 19);
             this.label12.TabIndex = 9;
-            this.label12.Text = "账号";
+            this.label12.Text = "ACCOUNT";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(21, 99);
+            this.label13.Location = new System.Drawing.Point(54, 167);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 19);
+            this.label13.Size = new System.Drawing.Size(43, 19);
             this.label13.TabIndex = 10;
-            this.label13.Text = "端口";
+            this.label13.Text = "PORT";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(36, 57);
+            this.label14.Location = new System.Drawing.Point(76, 59);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(20, 19);
+            this.label14.Size = new System.Drawing.Size(21, 19);
             this.label14.TabIndex = 11;
-            this.label14.Text = "ip";
+            this.label14.Text = "IP";
             // 
             // tb_upload_serverPath
             // 
             this.tb_upload_serverPath.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_upload_serverPath.Location = new System.Drawing.Point(62, 224);
+            this.tb_upload_serverPath.Location = new System.Drawing.Point(103, 320);
             this.tb_upload_serverPath.Name = "tb_upload_serverPath";
-            this.tb_upload_serverPath.Size = new System.Drawing.Size(198, 25);
+            this.tb_upload_serverPath.Size = new System.Drawing.Size(217, 25);
             this.tb_upload_serverPath.TabIndex = 14;
             this.tb_upload_serverPath.Text = "/home/project/";
+            this.toolTip1.SetToolTip(this.tb_upload_serverPath, "ftp upload address");
             // 
             // tb_upload_pwd
             // 
             this.tb_upload_pwd.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_upload_pwd.Location = new System.Drawing.Point(62, 183);
+            this.tb_upload_pwd.Location = new System.Drawing.Point(103, 269);
             this.tb_upload_pwd.Name = "tb_upload_pwd";
-            this.tb_upload_pwd.Size = new System.Drawing.Size(198, 25);
+            this.tb_upload_pwd.Size = new System.Drawing.Size(217, 25);
             this.tb_upload_pwd.TabIndex = 14;
-            this.tb_upload_pwd.Text = "ABSznh123";
+            this.tb_upload_pwd.Text = "Abc123456***";
+            this.toolTip1.SetToolTip(this.tb_upload_pwd, "ftp password");
             // 
             // tb_upload_user
             // 
             this.tb_upload_user.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_upload_user.Location = new System.Drawing.Point(62, 141);
+            this.tb_upload_user.Location = new System.Drawing.Point(103, 218);
             this.tb_upload_user.Name = "tb_upload_user";
-            this.tb_upload_user.Size = new System.Drawing.Size(198, 25);
+            this.tb_upload_user.Size = new System.Drawing.Size(217, 25);
             this.tb_upload_user.TabIndex = 13;
             this.tb_upload_user.Text = "root";
+            this.toolTip1.SetToolTip(this.tb_upload_user, "ftp user");
             // 
             // tb_upload_port
             // 
             this.tb_upload_port.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_upload_port.Location = new System.Drawing.Point(62, 99);
+            this.tb_upload_port.Location = new System.Drawing.Point(103, 167);
             this.tb_upload_port.Name = "tb_upload_port";
-            this.tb_upload_port.Size = new System.Drawing.Size(198, 25);
+            this.tb_upload_port.Size = new System.Drawing.Size(217, 25);
             this.tb_upload_port.TabIndex = 12;
             this.tb_upload_port.Text = "22";
+            this.toolTip1.SetToolTip(this.tb_upload_port, "ftp port");
             // 
             // tb_upload_ip
             // 
             this.tb_upload_ip.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_upload_ip.Location = new System.Drawing.Point(62, 57);
+            this.tb_upload_ip.Location = new System.Drawing.Point(103, 59);
+            this.tb_upload_ip.Multiline = true;
             this.tb_upload_ip.Name = "tb_upload_ip";
-            this.tb_upload_ip.Size = new System.Drawing.Size(198, 25);
+            this.tb_upload_ip.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tb_upload_ip.Size = new System.Drawing.Size(217, 82);
             this.tb_upload_ip.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.tb_upload_ip, "upload servers ip");
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(98, 9);
+            this.label10.Location = new System.Drawing.Point(128, 7);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 27);
+            this.label10.Size = new System.Drawing.Size(138, 27);
             this.label10.TabIndex = 6;
-            this.label10.Text = "文件上传";
+            this.label10.Text = "FILE UPLOAD";
             // 
             // lb_upload
             // 
@@ -539,11 +569,12 @@
             this.lb_upload.BackColor = System.Drawing.Color.Transparent;
             this.lb_upload.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.lb_upload.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lb_upload.Location = new System.Drawing.Point(735, 90);
+            this.lb_upload.Location = new System.Drawing.Point(761, 2);
             this.lb_upload.Name = "lb_upload";
             this.lb_upload.Size = new System.Drawing.Size(35, 35);
             this.lb_upload.TabIndex = 12;
             this.lb_upload.Text = "<";
+            this.toolTip1.SetToolTip(this.lb_upload, "show upload window");
             this.lb_upload.Click += new System.EventHandler(this.lb_upload_Click);
             this.lb_upload.MouseEnter += new System.EventHandler(this._MouseEnter);
             this.lb_upload.MouseLeave += new System.EventHandler(this._MouseLeave);
@@ -656,20 +687,22 @@
             this.tb_errorIp.BackColor = System.Drawing.Color.Black;
             this.tb_errorIp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_errorIp.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_errorIp.ForeColor = System.Drawing.Color.Lime;
-            this.tb_errorIp.Location = new System.Drawing.Point(441, 329);
+            this.tb_errorIp.ForeColor = System.Drawing.Color.White;
+            this.tb_errorIp.Location = new System.Drawing.Point(18, 227);
             this.tb_errorIp.MaxLength = 0;
             this.tb_errorIp.Multiline = true;
             this.tb_errorIp.Name = "tb_errorIp";
-            this.tb_errorIp.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tb_errorIp.Size = new System.Drawing.Size(329, 92);
+            this.tb_errorIp.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tb_errorIp.Size = new System.Drawing.Size(346, 92);
             this.tb_errorIp.TabIndex = 14;
+            this.toolTip1.SetToolTip(this.tb_errorIp, "error server ip");
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label22.Location = new System.Drawing.Point(569, 306);
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(145, 205);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(89, 17);
             this.label22.TabIndex = 15;
@@ -679,7 +712,8 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label24.Location = new System.Drawing.Point(593, 426);
+            this.label24.ForeColor = System.Drawing.Color.White;
+            this.label24.Location = new System.Drawing.Point(169, 325);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(40, 17);
             this.label24.TabIndex = 17;
@@ -690,14 +724,40 @@
             this.tb_errorMessage.BackColor = System.Drawing.Color.Black;
             this.tb_errorMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_errorMessage.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tb_errorMessage.ForeColor = System.Drawing.Color.Lime;
-            this.tb_errorMessage.Location = new System.Drawing.Point(441, 449);
+            this.tb_errorMessage.ForeColor = System.Drawing.Color.White;
+            this.tb_errorMessage.Location = new System.Drawing.Point(18, 347);
             this.tb_errorMessage.MaxLength = 0;
             this.tb_errorMessage.Multiline = true;
             this.tb_errorMessage.Name = "tb_errorMessage";
-            this.tb_errorMessage.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tb_errorMessage.Size = new System.Drawing.Size(329, 92);
+            this.tb_errorMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tb_errorMessage.Size = new System.Drawing.Size(346, 92);
             this.tb_errorMessage.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.tb_errorMessage, "result");
+            // 
+            // pn_msg
+            // 
+            this.pn_msg.Controls.Add(this.label25);
+            this.pn_msg.Controls.Add(this.tb_command);
+            this.pn_msg.Controls.Add(this.label9);
+            this.pn_msg.Controls.Add(this.label24);
+            this.pn_msg.Controls.Add(this.tb_errorIp);
+            this.pn_msg.Controls.Add(this.tb_errorMessage);
+            this.pn_msg.Controls.Add(this.label22);
+            this.pn_msg.Location = new System.Drawing.Point(432, 96);
+            this.pn_msg.Name = "pn_msg";
+            this.pn_msg.Size = new System.Drawing.Size(352, 451);
+            this.pn_msg.TabIndex = 18;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label25.Location = new System.Drawing.Point(14, 4);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(38, 19);
+            this.label25.TabIndex = 19;
+            this.label25.Text = "clear";
+            this.label25.Click += new System.EventHandler(this.label25_Click);
             // 
             // CACodeServerInit
             // 
@@ -705,14 +765,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(796, 646);
+            this.Controls.Add(this.pn_msg);
             this.Controls.Add(this.pn_upload);
-            this.Controls.Add(this.label24);
-            this.Controls.Add(this.tb_errorMessage);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.tb_errorIp);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.tb_command);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_cancel);
@@ -748,6 +803,8 @@
             this.tb_upload_filePath.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pn_msg.ResumeLayout(false);
+            this.pn_msg.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -810,6 +867,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox tb_errorMessage;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel pn_msg;
+        private System.Windows.Forms.Label label25;
     }
 }
 

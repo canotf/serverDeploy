@@ -63,6 +63,13 @@ namespace com.cacode.restartService {
                 if (item is TextBox) {
                     item.Text = "";
                 }
+                if (item is Panel) {
+                    foreach (Control it in item.Controls) {
+                        if (it is TextBox) {
+                            it.Text = "";
+                        }
+                    }
+                }
             }
         }
 
@@ -75,29 +82,35 @@ namespace com.cacode.restartService {
             string initPort = this.tb_initPort.Text;
             string user = this.tb_user.Text;
             bool @checked = this.cb_kill.Checked;
+            this.lb_errorCount.Text = "0";
+            this.lb_successCount.Text = "0";
+            this.lb_runCount.Text = "0";
+            this.lb_count.Text = "0";
             this.lb_count.Text = vs.Length + "";
             foreach (var item in vs) {
                 new Thread(() => {
                     string ip = item.Replace("\r", "");
                     Renci.SshNet.ConnectionInfo connectionInfo = SshUtil.getSsh(ip, Convert.ToInt32(port), user, pwd);
                     if (@checked) {
-                        string com = "netstat -lnp|grep " + initPort;
-                        log("execute -> " + com);
-                        string findPort = SshUtil.executeCommand(connectionInfo, com);
-                        log("resutl -> " + findPort);
-                        int index = findPort.LastIndexOf("/");
-                        findPort = findPort.Substring(index - 10, 10).Trim();
-                        findPort = Regex.Replace(findPort, "[a-zA-Z]", "");
-                        string end = findPort.Substring(findPort.Length - 1);
                         try {
+                            string com = "netstat -lnp|grep " + initPort;
+                            log("execute -> " + com);
+                            string findPort = SshUtil.executeCommand(connectionInfo, com);
+                            log("resutl -> " + findPort);
+                            int index = findPort.LastIndexOf("/");
+                            findPort = findPort.Substring(index - 10, 10).Trim();
+                            findPort = Regex.Replace(findPort, "[a-zA-Z]", "");
+                            string end = findPort.Substring(findPort.Length - 1);
                             Convert.ToInt32(end);
-                        } catch {
+                            string kill = "kill -9 " + findPort;
+                            log("execute -> " + kill);
+                            string re = SshUtil.executeCommand(connectionInfo, kill);
+                            log(re);
                             findPort = findPort.Substring(0, findPort.Length - 1);
+                        } catch (Exception err) {
+                            this.tb_errorIp.Text += item + "\r\n";
+                            this.tb_errorMessage.Text += err + "\r\n";
                         }
-                        string kill = "kill -9 " + findPort;
-                        log("execute -> " + kill);
-                        string re = SshUtil.executeCommand(connectionInfo, kill);
-                        log(re);
                     }
                     log("execute -> " + script);
                     string result = SshUtil.executeCommand(connectionInfo, script);
@@ -129,8 +142,14 @@ namespace com.cacode.restartService {
         }
 
         private void tm_showUpload_Tick(object sender, EventArgs e) {
-            if (this.pn_upload.Location.X > 520) {
-                this.pn_upload.Location = new Point(this.pn_upload.Location.X - 30, 66);
+            this.pn_msg.Location = new Point(0, 0);
+            this.pn_msg.Size = new Size(403, 570);
+            this.pn_msg.BackColor = Color.White;
+            foreach (Control item in this.pn_msg.Controls) {
+                item.ForeColor = Color.Green;
+            }
+            if (this.pn_upload.Location.X > 409) {
+                this.pn_upload.Location = new Point(this.pn_upload.Location.X - 30, 0);
             } else {
                 this.tm_showUpload.Stop();
             }
@@ -141,8 +160,14 @@ namespace com.cacode.restartService {
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
+            this.pn_msg.Location = new Point(432, 96);
+            this.pn_msg.Size = new Size(352, 451);
+            this.pn_msg.BackColor = Color.DarkSlateGray;
+            foreach (Control item in this.pn_msg.Controls) {
+                item.ForeColor = Color.White;
+            }
             if (this.pn_upload.Location.X < 796) {
-                this.pn_upload.Location = new Point(this.pn_upload.Location.X + 30, 66);
+                this.pn_upload.Location = new Point(this.pn_upload.Location.X + 30, 0);
             } else {
                 this.timer1.Stop();
             }
@@ -165,17 +190,51 @@ namespace com.cacode.restartService {
             string pwd = this.tb_upload_pwd.Text;
             string serverPath = this.tb_upload_serverPath.Text;
             string user = this.tb_upload_user.Text;
-            Renci.SshNet.ConnectionInfo connectionInfo = SshUtil.getSsh(ip, Convert.ToInt32(port), user, pwd);
-            new Thread(() => {
-                foreach (string filePath in filePaths) {
+            string[] up_ip = ip.Split('\n');
 
-                    string fileName = filePath.Substring(filePath.LastIndexOf("\\")).Substring(1);
-                    log("upload -> " + filePath);
-                    SshUtil.Upload(connectionInfo, filePath, fileName, serverPath);
-                    MessageBox.Show("成功上传文件:" + fileName);
-                    this.btn_upload.Enabled = true;
+            this.lb_errorCount.Text = "0";
+            this.lb_successCount.Text = "0";
+            this.lb_runCount.Text = "0";
+            this.lb_count.Text = "0";
+
+            this.lb_count.Text = up_ip.Length + "";
+            new Thread(() => {
+                foreach (string upload_ip in up_ip) {
+                    string _ip = upload_ip.Replace("\r", "");
+
+                    foreach (string filePath in filePaths) {
+                        try {
+
+                            Renci.SshNet.ConnectionInfo connectionInfo = SshUtil.getSsh(_ip, Convert.ToInt32(port), user, pwd);
+
+                            string fileName = filePath.Substring(filePath.LastIndexOf("\\")).Substring(1);
+                            log("upload -> " + filePath);
+                            log("ip -> " + _ip);
+                            SshUtil.Upload(connectionInfo, filePath, fileName, serverPath);
+                            log(_ip + " upload is ok");
+                            this.btn_upload.Enabled = true;
+                            this.lb_successCount.Text = Convert.ToInt32(this.lb_successCount.Text) + 1 + "";
+                        } catch (Exception err) {
+                            this.lb_errorCount.Text = Convert.ToInt32(this.lb_errorCount.Text) + 1 + "";
+                            this.tb_errorIp.Text += _ip + "\r\n";
+                            this.tb_errorMessage.Text += err + "\r\n";
+                            log("upload error ip ->" + _ip);
+                            log("upload error file ->:" + filePath);
+
+                        }
+                        this.lb_runCount.Text = Convert.ToInt32(this.lb_runCount.Text) + 1 + "";
+                    }
+
                 }
             }).Start();
+        }
+
+        private void label25_Click(object sender, EventArgs e) {
+            foreach (Control item in this.pn_msg.Controls) {
+                if (item is TextBox) {
+                    item.Text = "";
+                }
+            }
         }
     }
 }
